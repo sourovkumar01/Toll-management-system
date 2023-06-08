@@ -1,0 +1,110 @@
+#include <bits/stdc++.h>
+#include <stdlib.h>
+#include <conio.h>
+#include <fstream>
+using namespace std;
+
+class Account{
+    private:
+	string id;
+	string ownerName;
+	string accountName;
+
+	double accountMoney;
+
+    public:
+	void createAccount(){
+		cout<<"Enter Your ID: ";
+		cin>>id;
+
+		id+=".txt";
+		freopen("id","r",stdin);
+
+		cout<<"Enter Your Name: ";
+		fflush(stdin);
+		getline(cin,ownerName);
+		cout << "Enter Account Name: ";
+		cin >> accountName;
+	}
+
+    void withdraw(int amount) {
+        accountMoney -= amount;
+    }
+
+    void deposit(int amount) {
+		accountMoney += amount;
+    }
+
+    void getAccountInfo() {
+    	try{
+    		if(!id){
+				throw "Id is invalid !!";
+    		}
+			cout<<"Your ID: "<<id<<endl;
+			cout<<"Your Name: "<<ownerName<<endl;
+			cout<<"Account Name: :"<< accountName<<endl;
+    	}catch (const char* s){
+			cout<<s<<endl;
+    	}
+
+    }
+};
+
+///start main function here
+
+int main()
+{
+    int choice;
+    int amount;
+    char exit;
+
+    Account obj;
+
+	for(;;){
+    cout << "C++Kash" << endl;
+    cout << "1. Create Account" << endl;
+    cout << "2. Send Money" << endl;
+    cout << "3. Mobile Recharge" << endl;
+    cout << "4. Cash In" << endl;
+    cout << "5. My Account" << endl;
+    cout << "Enter: ";
+    cin >> choice;
+
+    system("CLS");
+
+    switch(choice) {
+    	case 1: obj.createAccount();
+				break;
+        case 2: cout <<"Enter Amount for Send Money" << endl;
+				cin>>amount;
+				obj.withdraw(amount);
+				cout << "Transaction Successful" << endl;
+				break;
+
+        case 3: cout <<"Enter Amount for Mobile Recharge" << endl;
+			    cin>>amount;
+			    obj.withdraw(amount);
+			    cout<<"Mobile Recharge successfully"<<endl;
+			    break;
+
+        case 4: cout << "Enter Amount for Cash In" << endl;
+				cin>>amount;
+				obj.deposit(amount);
+				cout <<"Cash In Successful" << endl;
+				break;
+
+        case 5: cout << "My Account" << endl;
+				obj.getAccountInfo();
+				break;
+    }
+    cout<<"For exit press _ e"<<endl;
+    cout<<"For next press n"<<endl;
+    cin>>exit;
+	if(exit=='e' || exit=='E')
+		break;
+	system("CLS");
+	}
+
+return 0;
+}
+
